@@ -6,45 +6,54 @@ import useTranslation from 'next-translate/useTranslation';
 
 export default function Home() {
 
-  const {t} = useTranslation();
-  const [result, setResult] = useState(null);
+    const {t} = useTranslation();
+    const [result, setResult] = useState(null);
 
-  const handleClick = async () => {
-    const {data} = await Axios.post('/api/login');
-    setResult(data);
-  }
+    const handleLogin = async () => {
+        const {data} = await Axios.post('/api/login');
+        setResult(data);
+    }
 
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    const handleLogin2 = async () => {
+        const {data} = await Axios.post('/api/auth/local');
+        setResult(data);
+    }
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          NextJS Proxy Config repo test.
-        </h1>
+    return (
+        <div className={styles.container}>
+            <Head>
+                <title>Create Next App</title>
+                <link rel="icon" href="/favicon.ico"/>
+            </Head>
 
-        <p className={styles.description}>
-          <button type="button" onClick={handleClick}>Click to call WS {t('buttons:send')}</button>
-        </p>
+            <main className={styles.main}>
+                <h1 className={styles.title}>
+                    NextJS Proxy Config repo test.
+                </h1>
 
-        <p className={styles.description}>
-          WSResult: {JSON.stringify(result)}
-        </p>
-      </main>
+                <p className={styles.description}>
+                    <button type="button" onClick={handleLogin}>Click to call WS {t('buttons:send')}</button>
+                </p>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+                <p className={styles.description}>
+                    <button type="button" onClick={handleLogin2}>Click to call WS2 {t('buttons:send')}</button>
+                </p>
+
+                <p className={styles.description}>
+                    WSResult: {JSON.stringify(result)}
+                </p>
+            </main>
+
+            <footer className={styles.footer}>
+                <a
+                    href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Powered by{' '}
+                    <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo}/>
+                </a>
+            </footer>
+        </div>
+    )
 }
