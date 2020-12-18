@@ -2,9 +2,11 @@ import {useState} from 'react';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Axios from 'axios';
+import useTranslation from 'next-translate/useTranslation';
 
 export default function Home() {
 
+  const {t} = useTranslation();
   const [result, setResult] = useState(null);
 
   const handleClick = async () => {
@@ -25,7 +27,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          <button type="button" onClick={handleClick}>Click to call WS</button>
+          <button type="button" onClick={handleClick}>Click to call WS {t('buttons:send')}</button>
         </p>
 
         <p className={styles.description}>
